@@ -34,59 +34,77 @@
 </script>
   </header>
 
-  <main class="grid-container">
-    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-      <img src="imges\3.png" alt="Game Small"/>
-      <div class="game-title-overlay">Hii Race 2D</div>
-    </a>
-    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\3.png" alt="Game Small"/>
-        <div class="game-title-overlay">Hii Race 2D</div>
-      </a>
+  <main class="grid-container" id="game-list">
+  <!-- Game cards will be dynamically loaded here -->
+</main>
 
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\3.png" alt="Game Small"/>
-        <div class="game-title-overlay">Hii Race 2D</div>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card medium">
-        <img src="imges\3.png" alt="Game Medium"/>
-        <div class="game-title-overlay">Hii Race 2D</div>
-      </a>
+ <!-- To load the game from fire base -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-   <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/&title=Hii+Race+2D" class="game-card big">
-  <div class="game-image-wrapper">
-    <img src="imges/3.png" alt="Hii Race 2D"/>
-    <div class="game-title-overlay">Hii Race 2D</div>
-  </div>
-</a>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
+    authDomain: "hellogames-3566b.firebaseapp.com",
+    projectId: "hellogames-3566b",
+    storageBucket: "hellogames-3566b.appspot.com",
+    messagingSenderId: "911778987452",
+    appId: "1:911778987452:web:9f1892121a87ea60907fb9",
+    measurementId: "G-GFM5ZQXFG5"
+  };
 
-    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card big">
-        <img src="imges\Game1.jpg" alt="Game Big"/>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\Game1.jpg" alt="Game Small"/>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\Game1.jpg" alt="Game Small"/>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\Game1.jpg" alt="Game Small"/>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\Game1.jpg" alt="Game Small"/>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\Game1.jpg" alt="Game Small"/>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\Game1.jpg" alt="Game Small"/>
-      </a>
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
-        <img src="imges\Game1.jpg" alt="Game Small"/>
-      </a>
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-    <!-- Duplicate with varying classes -->
-  </main>
+  const gameList = document.getElementById('game-list');
+
+  async function loadGames() {
+    gameList.innerHTML = ''; // Clear existing games if any
+    const querySnapshot = await getDocs(collection(db, "games"));
+    querySnapshot.forEach((doc) => {
+      const game = doc.data();
+
+      // Construct the game card element exactly like your existing HTML structure
+      const a = document.createElement('a');
+      a.href = `play.html?game=${encodeURIComponent(game.link)}&title=${encodeURIComponent(game.name)}`;
+      a.className = `game-card ${game.size || 'small'}`;
+
+      // For "big" size, your HTML has a nested div wrapper, replicate that
+      if (game.size === 'big') {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'game-image-wrapper';
+
+        const img = document.createElement('img');
+        img.src = game.image;
+        img.alt = game.name;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'game-title-overlay';
+        overlay.textContent = game.name;
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(overlay);
+        a.appendChild(wrapper);
+      } else {
+        // For "small" or "medium", just img + overlay div inside the <a>
+        const img = document.createElement('img');
+        img.src = game.image;
+        img.alt = game.name;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'game-title-overlay';
+        overlay.textContent = game.name;
+
+        a.appendChild(img);
+        a.appendChild(overlay);
+      }
+
+      gameList.appendChild(a);
+    });
+  }
+
+  loadGames();
+</script>
 </body>
 </html>
 
