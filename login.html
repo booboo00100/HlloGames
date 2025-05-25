@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Join the Game | Sign Up</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Back | Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -34,7 +34,7 @@
       color: var(--text);
     }
 
-    .signup-container {
+    .login-container {
       background-color: #fff;
       padding: 2.5rem;
       border-radius: 16px;
@@ -47,7 +47,7 @@
       overflow: hidden;
     }
 
-    .signup-container::before {
+    .login-container::before {
       content: '';
       position: absolute;
       top: 0;
@@ -83,7 +83,7 @@
       color: var(--text);
     }
 
-    input[type="text"] {
+    input {
       width: 100%;
       padding: 0.8rem 1rem;
       border: 2px solid #e9ecef;
@@ -92,7 +92,7 @@
       transition: all 0.3s ease;
     }
 
-    input[type="text"]:focus {
+    input:focus {
       border-color: var(--primary);
       outline: none;
       box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
@@ -105,7 +105,7 @@
       display: none;
     }
 
-    button {
+    .btn {
       background-color: var(--primary);
       color: white;
       border: none;
@@ -121,12 +121,12 @@
       letter-spacing: 0.5px;
     }
 
-    button:hover {
+    .btn:hover {
       background-color: var(--primary-dark);
       transform: translateY(-2px);
     }
 
-    button:active {
+    .btn:active {
       transform: translateY(0);
     }
 
@@ -166,19 +166,60 @@
       color: var(--primary);
     }
 
-    .terms {
-      font-size: 0.75rem;
-      color: #666;
-      margin-top: 1.5rem;
+    .forgot-password {
+      text-align: right;
+      margin-top: -1rem;
+      margin-bottom: 1.5rem;
     }
 
-    .terms a {
+    .forgot-password a {
+      color: #666;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .forgot-password a:hover {
+      color: var(--primary);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: #666;
+      font-size: 0.8rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .divider::before {
+      margin-right: 1rem;
+    }
+
+    .divider::after {
+      margin-left: 1rem;
+    }
+
+    .signup-link {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .signup-link a {
       color: var(--primary);
       text-decoration: none;
+      font-weight: 500;
     }
 
     @media (max-width: 480px) {
-      .signup-container {
+      .login-container {
         padding: 1.5rem;
       }
       
@@ -189,78 +230,61 @@
   </style>
 </head>
 <body>
-  <div class="signup-container">
+  <div class="login-container">
     <div class="logo">GameZone</div>
-    <h1>Create Your Account</h1>
-    <p class="subtitle">Join our gaming community and start playing today</p>
+    <h1>Welcome Back</h1>
+    <p class="subtitle">Sign in to continue your gaming adventure</p>
     
-    <form id="signup-form">
+    <form id="login-form">
       <div class="form-group">
         <label for="player-name">Player Name</label>
         <input 
           type="text" 
           id="player-name" 
           placeholder="Enter your gaming name" 
-          autocomplete="off"
+          autocomplete="username"
           autocapitalize="words"
           minlength="2"
           maxlength="20"
           required
         />
-        <div class="error-message" id="name-error">Please enter a valid name (2-20 characters)</div>
+        <div class="error-message" id="name-error">Please enter your registered name</div>
       </div>
       
-      <button type="submit" id="submit-btn">
-        <span id="btn-text">Continue</span>
+      <div class="forgot-password">
+        <a href="#">Forgot your name?</a>
+      </div>
+      
+      <button type="submit" class="btn" id="submit-btn">
+        <span id="btn-text">Sign In</span>
       </button>
       
       <div class="success-message" id="success-message">
         Success! Redirecting you to the game...
       </div>
+      
+      <div class="divider">or</div>
+      
+      <button type="button" class="btn" id="guest-btn" style="background-color: #6c757d;">
+        <span id="guest-btn-text">Play as Guest</span>
+      </button>
+      
+      <div class="signup-link">
+        Don't have an account? <a href="signup.html">Sign up</a>
+      </div>
     </form>
-    
-    <p class="terms">
-      By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-    </p>
   </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
-      authDomain: "hellogames-3566b.firebaseapp.com",
-      projectId: "hellogames-3566b",
-      storageBucket: "hellogames-3566b.appspot.com",
-      messagingSenderId: "911778987452",
-      appId: "1:911778987452:web:9f1892121a87ea60907fb9",
-      measurementId: "G-GFM5ZQXFG5"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // DOM elements
-    const form = document.getElementById('signup-form');
-    const nameInput = document.getElementById('player-name');
-    const nameError = document.getElementById('name-error');
-    const submitBtn = document.getElementById('submit-btn');
-    const btnText = document.getElementById('btn-text');
-    const successMessage = document.getElementById('success-message');
-
-    // Validate name input
-    nameInput.addEventListener('input', () => {
-      if (nameInput.validity.valid) {
-        nameError.style.display = 'none';
-        nameInput.style.borderColor = '#e9ecef';
-      }
-    });
-
-    form.addEventListener('submit', async (e) => {
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      const nameInput = document.getElementById('player-name');
       const name = nameInput.value.trim();
+      const nameError = document.getElementById('name-error');
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const successMessage = document.getElementById('success-message');
       
       // Validate input
       if (name.length < 2 || name.length > 20) {
@@ -272,14 +296,11 @@
       
       // Show loading state
       submitBtn.disabled = true;
-      btnText.innerHTML = `<span class="loading"></span> Creating account...`;
+      btnText.innerHTML = `<span class="loading"></span> Signing in...`;
       
       try {
-        // Save to Firebase
-        await addDoc(collection(db, "players"), { 
-          name,
-          createdAt: new Date().toISOString()
-        });
+        // Simulate API call (replace with actual authentication)
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
         // Save to local storage
         localStorage.setItem('playerName', name);
@@ -294,16 +315,28 @@
         }, 1500);
         
       } catch (error) {
-        console.error("Error saving to Firebase:", error);
-        btnText.textContent = 'Continue';
+        console.error("Login error:", error);
+        btnText.textContent = 'Sign In';
         submitBtn.disabled = false;
-        alert("Oops! Something went wrong. Please try again.");
+        alert("Login failed. Please try again.");
       }
+    });
+    
+    // Guest login handler
+    document.getElementById('guest-btn').addEventListener('click', () => {
+      localStorage.setItem('playerName', 'Guest');
+      window.location.href = "index.html";
     });
     
     // Focus name input on page load
     window.addEventListener('DOMContentLoaded', () => {
-      nameInput.focus();
+      document.getElementById('player-name').focus();
+      
+      // Check if there's a previously used name
+      const savedName = localStorage.getItem('playerName');
+      if (savedName && savedName !== 'Guest') {
+        document.getElementById('player-name').value = savedName;
+      }
     });
   </script>
 </body>
