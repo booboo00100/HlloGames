@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Category Games</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .game-card {
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .game-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .game-title-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      text-align: center;
+      padding: 5px;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    .game-image-wrapper {
+      position: relative;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .back-button:hover {
+      background-color: #45a049;
+    }
+
+    #category-title {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button">← Back to Home</a>
+  <h1 id="category-title"></h1>
+  <main class="grid-container" id="game-list"></main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
+      authDomain: "hellogames-3566b.firebaseapp.com",
+      projectId: "hellogames-3566b",
+      storageBucket: "hellogames-3566b.appspot.com",
+      messagingSenderId: "911778987452",
+      appId: "1:911778987452:web:9f1892121a87ea60907fb9",
+      measurementId: "G-GFM5ZQXFG5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const gameList = document.getElementById('game-list');
+    const categoryTitle = document.getElementById('category-title');
+
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    categoryTitle.textContent = `Games in Category: ${category}`;
+
+    async function loadCategoryGames() {
+      gameList.innerHTML = '';
+      const querySnapshot = await getDocs(collection(db, "games"));
+      querySnapshot.forEach((doc) => {
+        const game = doc.data();
+        if (game.category === category) {
+          const a = document.createElement('a');
+          a.href = `play.html?game=${encodeURIComponent(game.link)}&title=${encodeURIComponent(game.name)}`;
+          a.className = `game-card ${game.size || 'small'}`;
+
+          if (game.size === 'big') {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'game-image-wrapper';
+
+            const img = document.createElement('img');
+            img.src = game.image;
+            img.alt = game.name;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'game-title-overlay';
+            overlay.textContent = game.name;
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(overlay);
+            a.appendChild(wrapper);
+          } else {
+            const img = document.createElement('img');
+            img.src = game.image;
+            img.alt = game.name;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'game-title-overlay';
+            overlay.textContent = game.name;
+
+            a.appendChild(img);
+            a.appendChild(overlay);
+          }
+
+          gameList.appendChild(a);
+        }
+      });
+    }
+
+    loadCategoryGames();
+  </script>
+</body>
+</html>

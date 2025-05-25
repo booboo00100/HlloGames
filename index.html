@@ -3,108 +3,262 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Hub</title>
+  <title>Game Hub | Play Free Online Games</title>
+  <meta name="description" content="Play free online games in various categories including action, puzzle, adventure and more.">
   <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 
 <body>
-<header style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #333; color: white;">
-  <h1 style="margin: 0;">Hello Games</h1>
-  <div id="player-info" style="display: flex; align-items: center; gap: 10px;">
-    <span id="player-name-display" style="font-weight: bold;"></span>
-    <button onclick="window.location.href='signup.html'" style="
-      padding: 8px 16px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    ">
-      Sign Up
-    </button>
-  </div>
-</header>
-<script>
-  // Show name from localStorage if available
-  const name = localStorage.getItem('playerName');
-  if (name) {
-    document.getElementById('player-name-display').textContent = `Welcome, ${name}!`;
-  }
-</script>
+  <header class="main-header">
+    <div class="header-content">
+      <div class="logo-container">
+        <h1 class="logo">Game Hub</h1>
+        <p class="tagline">Your portal to endless fun!</p>
+      </div>
+      
+      <div id="player-info">
+        <span id="player-name-display"></span>
+        <div class="auth-buttons">
+          <button id="login-btn" class="auth-btn">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+          <button id="signup-btn" class="auth-btn primary">
+            <i class="fas fa-user-plus"></i> Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="category-nav">
+      <button class="category-btn active" data-category="all">All Games</button>
+      <button class="category-btn" data-category="action">Action</button>
+      <button class="category-btn" data-category="puzzle">Puzzle</button>
+      <button class="category-btn" data-category="adventure">Adventure</button>
+      <button class="category-btn" data-category="sports">Sports</button>
+      <button class="category-btn" data-category="racing">Racing</button>
+    </nav>
   </header>
 
-  <main class="grid-container" id="game-list">
-  <!-- Game cards will be dynamically loaded here -->
-</main>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Discover Amazing Games</h2>
+        <p>Thousands of free games waiting for you to play!</p>
+        <div class="search-container">
+          <input type="text" placeholder="Search games..." id="game-search">
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </section>
 
- <!-- To load the game from fire base -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    <section class="featured-games">
+      <h3 class="section-title"><i class="fas fa-star"></i> Featured Games</h3>
+      <div class="grid-container" id="featured-list"></div>
+    </section>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
-    authDomain: "hellogames-3566b.firebaseapp.com",
-    projectId: "hellogames-3566b",
-    storageBucket: "hellogames-3566b.appspot.com",
-    messagingSenderId: "911778987452",
-    appId: "1:911778987452:web:9f1892121a87ea60907fb9",
-    measurementId: "G-GFM5ZQXFG5"
-  };
+    <section class="all-games">
+      <h3 class="section-title"><i class="fas fa-gamepad"></i> All Games</h3>
+      <div class="grid-container" id="game-list"></div>
+    </section>
+  </main>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Game Hub</h4>
+        <p>Your ultimate destination for free online games since 2023.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Popular Games</a></li>
+          <li><a href="#">New Releases</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 Game Hub. All rights reserved.</p>
+    </div>
+  </footer>
 
-  const gameList = document.getElementById('game-list');
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-  async function loadGames() {
-    gameList.innerHTML = ''; // Clear existing games if any
-    const querySnapshot = await getDocs(collection(db, "games"));
-    querySnapshot.forEach((doc) => {
-      const game = doc.data();
+    const firebaseConfig = {
+      apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
+      authDomain: "hellogames-3566b.firebaseapp.com",
+      projectId: "hellogames-3566b",
+      storageBucket: "hellogames-3566b.appspot.com",
+      messagingSenderId: "911778987452",
+      appId: "1:911778987452:web:9f1892121a87ea60907fb9",
+      measurementId: "G-GFM5ZQXFG5"
+    };
 
-      // Construct the game card element exactly like your existing HTML structure
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // DOM elements
+    const gameList = document.getElementById('game-list');
+    const featuredList = document.getElementById('featured-list');
+    const searchInput = document.getElementById('game-search');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const signupBtn = document.getElementById('signup-btn');
+    const loginBtn = document.getElementById('login-btn');
+
+    // Check for logged in user
+    function checkAuthState() {
+      const name = localStorage.getItem('playerName');
+      if (name) {
+        document.getElementById('player-name-display').textContent = `Welcome back, ${name}!`;
+        document.querySelector('.auth-buttons').style.display = 'none';
+      }
+    }
+
+    // Load games with optional category filter
+    async function loadGames(category = 'all') {
+      gameList.innerHTML = '<div class="loader">Loading games...</div>';
+      
+      try {
+        let gamesQuery;
+        if (category === 'all') {
+          gamesQuery = query(collection(db, "games"), orderBy('name'));
+        } else {
+          gamesQuery = query(collection(db, "games"), where('category', '==', category), orderBy('name'));
+        }
+
+        const querySnapshot = await getDocs(gamesQuery);
+        gameList.innerHTML = '';
+
+        if (querySnapshot.empty) {
+          gameList.innerHTML = '<div class="no-games">No games found in this category.</div>';
+          return;
+        }
+
+        querySnapshot.forEach((doc) => {
+          const game = doc.data();
+          createGameCard(game, gameList);
+        });
+      } catch (error) {
+        console.error("Error loading games: ", error);
+        gameList.innerHTML = '<div class="error">Failed to load games. Please try again later.</div>';
+      }
+    }
+
+    // Load featured games
+    async function loadFeaturedGames() {
+      featuredList.innerHTML = '<div class="loader">Loading featured games...</div>';
+      
+      try {
+        const featuredQuery = query(collection(db, "games"), where('featured', '==', true), limit(4));
+        const querySnapshot = await getDocs(featuredQuery);
+        featuredList.innerHTML = '';
+
+        querySnapshot.forEach((doc) => {
+          const game = doc.data();
+          createGameCard(game, featuredList, true);
+        });
+      } catch (error) {
+        console.error("Error loading featured games: ", error);
+        featuredList.innerHTML = '<div class="error">Failed to load featured games.</div>';
+      }
+    }
+
+    // Create game card element
+    function createGameCard(game, container, isFeatured = false) {
       const a = document.createElement('a');
-      a.href = `play.html?game=${encodeURIComponent(game.link)}&title=${encodeURIComponent(game.name)}`;
-      a.className = `game-card ${game.size || 'small'}`;
+      a.href = `play.html?game=${encodeURIComponent(game.link)}&title=${encodeURIComponent(game.name)}&img=${encodeURIComponent(game.image)}&desc=${encodeURIComponent(game.description || '')}`;
+      a.className = `game-card ${game.size || 'small'} ${isFeatured ? 'featured' : ''}`;
+      a.setAttribute('data-category', game.category || 'other');
 
-      // For "big" size, your HTML has a nested div wrapper, replicate that
+      const img = document.createElement('img');
+      img.src = game.image;
+      img.alt = game.name;
+      img.loading = "lazy";
+
+      const overlay = document.createElement('div');
+      overlay.className = 'game-overlay';
+
+      const title = document.createElement('h3');
+      title.className = 'game-title';
+      title.textContent = game.name;
+
+      const category = document.createElement('span');
+      category.className = 'game-category';
+      category.textContent = game.category || 'General';
+
+      overlay.appendChild(title);
+      overlay.appendChild(category);
+      
       if (game.size === 'big') {
         const wrapper = document.createElement('div');
         wrapper.className = 'game-image-wrapper';
-
-        const img = document.createElement('img');
-        img.src = game.image;
-        img.alt = game.name;
-
-        const overlay = document.createElement('div');
-        overlay.className = 'game-title-overlay';
-        overlay.textContent = game.name;
-
         wrapper.appendChild(img);
         wrapper.appendChild(overlay);
         a.appendChild(wrapper);
       } else {
-        // For "small" or "medium", just img + overlay div inside the <a>
-        const img = document.createElement('img');
-        img.src = game.image;
-        img.alt = game.name;
-
-        const overlay = document.createElement('div');
-        overlay.className = 'game-title-overlay';
-        overlay.textContent = game.name;
-
         a.appendChild(img);
         a.appendChild(overlay);
       }
 
-      gameList.appendChild(a);
-    });
-  }
+      if (isFeatured) {
+        const featuredBadge = document.createElement('span');
+        featuredBadge.className = 'featured-badge';
+        featuredBadge.innerHTML = '<i class="fas fa-star"></i> Featured';
+        a.appendChild(featuredBadge);
+      }
 
-  loadGames();
-</script>
+      container.appendChild(a);
+    }
+
+    // Initialize page
+    function init() {
+      checkAuthState();
+      loadGames();
+      loadFeaturedGames();
+
+      // Event listeners
+      categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          categoryBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          loadGames(btn.dataset.category);
+        });
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.game-card');
+        
+        cards.forEach(card => {
+          const title = card.querySelector('.game-title').textContent.toLowerCase();
+          card.style.display = title.includes(searchTerm) ? 'block' : 'none';
+        });
+      });
+
+      signupBtn.addEventListener('click', () => {
+        window.location.href = 'signup.html';
+      });
+
+      loginBtn.addEventListener('click', () => {
+        window.location.href = 'login.html';
+      });
+    }
+
+    // Start the app
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
 </body>
 </html>
-
