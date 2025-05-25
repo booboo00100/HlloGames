@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Play Game</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      text-align: center;
+      padding: 1rem;
+      background: #007bff;
+      color: white;
+      font-size: 24px;
+    }
+
+    .game-container {
+      position: relative;
+      height: 80vh;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .play-btn {
+      position: absolute;
+      z-index: 10;
+      padding: 16px 32px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #28a745;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .play-btn:hover {
+      background-color: #218838;
+    }
+
+    .game-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+
+    .recommended-section {
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .recommended-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .recommended-games {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px;
+    }
+
+    .game-tile {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .game-tile:hover {
+      transform: scale(1.05);
+    }
+
+    .game-tile img {
+      width: 100%;
+      height: auto;
+    }
+
+    .game-tile p {
+      margin: 0;
+      padding: 5px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <header id="gameTitle">Now Playing</header>
+
+  <div class="game-container" id="gameContainer">
+    <button class="play-btn" onclick="startGame()">Play Game</button>
+    <iframe id="gameIframe" class="game-frame" allowfullscreen></iframe>
+  </div>
+
+  <div class="recommended-section">
+    <div class="recommended-title">Recommended Games</div>
+    <div class="recommended-games">
+      <a href="play.html?game=games/subway.html&title=Subway+Surfers&img=images/subway.png" class="game-tile">
+        <img src="images/subway.png" alt="Subway Surfers"/>
+        <p>Subway Surfers</p>
+      </a>
+      <a href="play.html?game=games/templerun.html&title=Temple+Run&img=images/templerun.png" class="game-tile">
+        <img src="images/templerun.png" alt="Temple Run"/>
+        <p>Temple Run</p>
+      </a>
+      <a href="play.html?game=games/mrracer.html&title=MR+Racer&img=images/racer.png" class="game-tile">
+        <img src="images/racer.png" alt="MR Racer"/>
+        <p>MR Racer</p>
+      </a>
+      <a href="play.html?game=games/farm.html&title=Farm+Game&img=images/farm.png" class="game-tile">
+        <img src="images/farm.png" alt="Farm Game"/>
+        <p>Farm Game</p>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const gameUrl = params.get("game");
+    const gameTitle = params.get("title") || "Now Playing";
+    const gameImg = params.get("img") || "";
+
+    const iframe = document.getElementById("gameIframe");
+    const container = document.getElementById("gameContainer");
+    const header = document.getElementById("gameTitle");
+
+    if (gameUrl) {
+      iframe.src = gameUrl;
+    }
+
+    header.textContent = decodeURIComponent(gameTitle);
+    if (gameImg) {
+      container.style.backgroundImage = `url(${decodeURIComponent(gameImg)})`;
+    }
+
+    function startGame() {
+      document.querySelector('.play-btn').style.display = 'none';
+      iframe.style.display = 'block';
+
+      const elem = iframe;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
