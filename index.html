@@ -6,28 +6,51 @@
   <title>Game Hub</title>
   <link rel="stylesheet" href="styles.css"/>
 </head>
+
 <body>
-  <header>
-    <h1>Game Hub</h1>
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #333; color: white;">
+  <h1 style="margin: 0;">Hello Games</h1>
+  <div id="player-info" style="display: flex; align-items: center; gap: 10px;">
+    <span id="player-name-display" style="font-weight: bold;"></span>
+    <button onclick="window.location.href='signup.html'" style="
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    ">
+      Sign Up
+    </button>
+  </div>
+</header>
+<script>
+  // Show name from localStorage if available
+  const name = localStorage.getItem('playerName');
+  if (name) {
+    document.getElementById('player-name-display').textContent = `Welcome, ${name}!`;
+  }
+</script>
   </header>
 
   <main class="grid-container">
-    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card big">
-      <img src="imges\2.png" alt="Game Big"/>
+    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
+      <img src="imges\3.png" alt="Game Small"/>
+      <div class="game-title-overlay">Hii Race 2D</div>
     </a>
-
-    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card medium">
-      <img src="imges\3.png" alt="Game Medium"/>
-    </a>
-    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card medium">
-        <img src="imges\3.png" alt="Game Medium"/>
+    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
+        <img src="imges\3.png" alt="Game Small"/>
+        <div class="game-title-overlay">Hii Race 2D</div>
       </a>
 
-      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card medium">
-        <img src="imges\3.png" alt="Game Medium"/>
+      <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card small">
+        <img src="imges\3.png" alt="Game Small"/>
+        <div class="game-title-overlay">Hii Race 2D</div>
       </a>
       <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/" class="game-card medium">
         <img src="imges\3.png" alt="Game Medium"/>
+        <div class="game-title-overlay">Hii Race 2D</div>
       </a>
 
    <a href="play.html?game=https://whitecrowqq.github.io/HiiRace2D.github.io/&title=Hii+Race+2D" class="game-card big">
