@@ -65,18 +65,16 @@
 
     .game-container {
       position: relative;
-      height: 70vh;
+      height: 100vh;
       background-color: #000;
       display: flex;
       align-items: center;
       justify-content: center;
       background-size: cover;
       background-position: center;
-      margin: 1rem auto;
-      max-width: 1200px;
-      border-radius: 10px;
+      margin: 0;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .game-overlay {
@@ -205,92 +203,6 @@
       color: white;
     }
 
-    .recommended-section {
-      padding: 1.5rem;
-      background: #fff;
-      max-width: 1200px;
-      margin: 2rem auto;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: var(--dark-color);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title i {
-      color: var(--primary-color);
-    }
-
-    .recommended-games {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 20px;
-    }
-
-    .game-tile {
-      background-color: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      text-align: center;
-      position: relative;
-      border: 1px solid #eee;
-    }
-
-    .game-tile:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .game-tile img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-bottom: 1px solid #eee;
-    }
-
-    .game-tile p {
-      margin: 0;
-      padding: 12px 5px;
-      font-size: 14px;
-      color: var(--dark-color);
-      font-weight: 600;
-    }
-
-    .game-tile .play-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.7);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .game-tile:hover .play-icon {
-      opacity: 1;
-    }
-
-    .game-tile .play-icon i {
-      color: white;
-      font-size: 16px;
-      margin-left: 3px;
-    }
-
     .error-message {
       color: var(--danger-color);
       text-align: center;
@@ -348,27 +260,6 @@
       margin-top: 20px;
     }
 
-    .reward-btn {
-      background: linear-gradient(to right, var(--success-color), #2ecc71);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .reward-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
-    }
-
     .cancel-btn {
       background: transparent;
       color: var(--gray-color);
@@ -397,19 +288,11 @@
 
     @media (max-width: 768px) {
       .game-container {
-        height: 60vh;
-        margin: 0.5rem;
+        height: 100vh;
+        margin: 0;
         border-radius: 0;
       }
       
-      .recommended-games {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      }
-      
-      .game-tile img {
-        height: 100px;
-      }
-
       #ad-panel {
         width: 95%;
         padding: 20px;
@@ -436,11 +319,6 @@
         padding: 12px 24px;
         font-size: 1rem;
       }
-      
-      .recommended-games {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 10px;
-      }
 
       #ad-panel h3 {
         font-size: 1.3rem;
@@ -456,7 +334,21 @@
   </header>
 
   <div class="game-container" id="gameContainer">
-    <div class="ad-overlay" id="adOverlay"></div>
+    <div class="ad-overlay" id="adOverlay">
+      <div id="ad-panel">
+        <div class="ad-icon">
+          <i class="fas fa-ad"></i>
+        </div>
+        <h3>Advertisement</h3>
+        <p>Please watch this short ad to continue playing</p>
+        <div class="ad-timer" id="adTimer">Ad will play automatically in <span id="timerCount">5</span>s</div>
+        <div class="ad-buttons">
+          <button id="close-btn" class="cancel-btn">
+            Skip Ad
+          </button>
+        </div>
+      </div>
+    </div>
     
     <div class="game-overlay" id="gameOverlay">
       <div class="loading-spinner" id="loadingSpinner"></div>
@@ -474,23 +366,6 @@
       allow="fullscreen"
       sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups"
     ></iframe>
-    
-    <div id="ad-panel">
-      <div class="ad-icon">
-        <i class="fas fa-ad"></i>
-      </div>
-      <h3>Want to Continue?</h3>
-      <p>Watch a short video to get extra lives or unlock special rewards!</p>
-      <div class="ad-timer" id="adTimer">Ad ready in <span id="timerCount">3</span>s</div>
-      <div class="ad-buttons">
-        <button id="watch-ad-btn" class="reward-btn">
-          <i class="fas fa-play-circle"></i> Watch Ad (30s)
-        </button>
-        <button id="close-btn" class="cancel-btn">
-          Not Now
-        </button>
-      </div>
-    </div>
   </div>
 
   <div class="error-message" id="errorMessage">
@@ -512,43 +387,6 @@
     </div>
   </div>
 
-  <div class="recommended-section">
-    <div class="section-title">
-      <i class="fas fa-gamepad"></i>
-      <span>Recommended Games</span>
-    </div>
-    <div class="recommended-games">
-      <a href="play.html?game=games/subway.html&title=Subway+Surfers&img=images/subway.png&desc=Run+through+subway+tunnels+and+dodge+trains+in+this+exciting+endless+runner" class="game-tile">
-        <img src="images/subway.png" alt="Subway Surfers"/>
-        <div class="play-icon">
-          <i class="fas fa-play"></i>
-        </div>
-        <p>Subway Surfers</p>
-      </a>
-      <a href="play.html?game=games/templerun.html&title=Temple+Run&img=images/templerun.png&desc=Run+through+ancient+ruins+while+being+chased+by+evil+monkeys" class="game-tile">
-        <img src="images/templerun.png" alt="Temple Run"/>
-        <div class="play-icon">
-          <i class="fas fa-play"></i>
-        </div>
-        <p>Temple Run</p>
-      </a>
-      <a href="play.html?game=games/mrracer.html&title=MR+Racer&img=images/racer.png&desc=High-speed+racing+game+with+stunning+graphics+and+multiple+tracks" class="game-tile">
-        <img src="images/racer.png" alt="MR Racer"/>
-        <div class="play-icon">
-          <i class="fas fa-play"></i>
-        </div>
-        <p>MR Racer</p>
-      </a>
-      <a href="play.html?game=games/farm.html&title=Farm+Game&img=images/farm.png&desc=Manage+your+own+farm+and+grow+delicious+crops" class="game-tile">
-        <img src="images/farm.png" alt="Farm Game"/>
-        <div class="play-icon">
-          <i class="fas fa-play"></i>
-        </div>
-        <p>Farm Game</p>
-      </a>
-    </div>
-  </div>
-
   <script>
     // DOM Elements
     const iframe = document.getElementById("gameIframe");
@@ -563,7 +401,6 @@
     const gameDescription = document.getElementById("gameDescription");
     const adOverlay = document.getElementById("adOverlay");
     const adPanel = document.getElementById("ad-panel");
-    const watchAdBtn = document.getElementById("watch-ad-btn");
     const closeBtn = document.getElementById("close-btn");
     const timerCount = document.getElementById("timerCount");
     const adTimer = document.getElementById("adTimer");
@@ -608,7 +445,6 @@
       };
 
       // Initially hide ad panel
-      adPanel.style.display = "none";
       adOverlay.style.display = "none";
     }
 
@@ -616,6 +452,15 @@
     function startGame() {
       document.querySelector('.play-btn').style.display = 'none';
       loadingSpinner.style.display = "block";
+      
+      // Go fullscreen
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen();
+      }
       
       // Determine which iframe to show based on URL
       if (gameUrl && gameUrl.includes('unity')) {
@@ -679,14 +524,8 @@
     // Show ad panel with countdown
     function showAdPanel() {
       adOverlay.style.display = "flex";
-      adPanel.style.display = "block";
       
-      // Disable buttons during countdown
-      watchAdBtn.disabled = true;
-      closeBtn.disabled = true;
-      watchAdBtn.style.opacity = "0.6";
-      
-      let count = 3;
+      let count = 5;
       timerCount.textContent = count;
       
       const countdown = setInterval(() => {
@@ -695,49 +534,25 @@
         
         if (count <= 0) {
           clearInterval(countdown);
-          adTimer.style.display = "none";
-          watchAdBtn.disabled = false;
-          closeBtn.disabled = false;
-          watchAdBtn.style.opacity = "1";
+          // Here you would typically start the ad
+          // For demo purposes, we'll just close it after a delay
+          setTimeout(() => {
+            closeAd();
+          }, 1000);
         }
       }, 1000);
     }
 
     // Close ad panel
-    closeBtn.addEventListener("click", () => {
-      adPanel.style.display = "none";
+    function closeAd() {
       adOverlay.style.display = "none";
-    });
+      // Send message to game that ad was completed
+      if (unityFrame.style.display === 'block') {
+        unityFrame.contentWindow.postMessage({ message: "ad_completed" }, "*");
+      }
+    }
 
-    // Watch ad button handler
-    watchAdBtn.addEventListener("click", () => {
-      // Here you would typically integrate with your ad SDK
-      console.log("Starting rewarded ad...");
-      
-      // Simulate ad loading
-      watchAdBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading Ad...';
-      watchAdBtn.disabled = true;
-      
-      // Simulate ad completion after 5 seconds
-      setTimeout(() => {
-        // Reward the player
-        console.log("Ad completed - rewarding player");
-        alert("Thanks for watching! You've been rewarded with 50 coins!");
-        
-        // Reset button
-        watchAdBtn.innerHTML = '<i class="fas fa-play-circle"></i> Watch Ad (30s)';
-        watchAdBtn.disabled = false;
-        
-        // Close ad panel
-        adPanel.style.display = "none";
-        adOverlay.style.display = "none";
-        
-        // Send message to game that reward was received
-        if (unityFrame.style.display === 'block') {
-          unityFrame.contentWindow.postMessage({ message: "reward_completed" }, "*");
-        }
-      }, 5000);
-    });
+    closeBtn.addEventListener("click", closeAd);
 
     // Listen for messages from Unity iframe
     window.addEventListener("message", (event) => {
