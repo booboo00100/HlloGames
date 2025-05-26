@@ -154,6 +154,14 @@
       background: #000;
     }
 
+    .unity-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+      background: #000;
+    }
+
     .game-info {
       padding: 1rem;
       max-width: 1200px;
@@ -290,6 +298,103 @@
       display: none;
     }
 
+    /* Ad Panel Styles */
+    .ad-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 100;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #ad-panel {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+      padding: 25px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      z-index: 101;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    #ad-panel h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    #ad-panel p {
+      margin: 15px 0;
+      color: var(--dark-color);
+    }
+
+    .ad-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .reward-btn {
+      background: linear-gradient(to right, var(--success-color), #2ecc71);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .reward-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+    }
+
+    .cancel-btn {
+      background: transparent;
+      color: var(--gray-color);
+      border: 1px solid var(--gray-color);
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cancel-btn:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .ad-timer {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: var(--gray-color);
+    }
+
+    .ad-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
     @media (max-width: 768px) {
       .game-container {
         height: 60vh;
@@ -303,6 +408,11 @@
       
       .game-tile img {
         height: 100px;
+      }
+
+      #ad-panel {
+        width: 95%;
+        padding: 20px;
       }
     }
 
@@ -331,6 +441,10 @@
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
         gap: 10px;
       }
+
+      #ad-panel h3 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
@@ -342,6 +456,8 @@
   </header>
 
   <div class="game-container" id="gameContainer">
+    <div class="ad-overlay" id="adOverlay"></div>
+    
     <div class="game-overlay" id="gameOverlay">
       <div class="loading-spinner" id="loadingSpinner"></div>
       <h2 class="game-title" id="displayTitle">Game Title</h2>
@@ -349,7 +465,32 @@
         <i class="fas fa-play"></i> Play Game
       </button>
     </div>
+    
     <iframe id="gameIframe" class="game-frame" allowfullscreen></iframe>
+    <iframe
+      id="unity-frame"
+      class="unity-frame"
+      src="https://whitecrowqq.github.io/Testad/"
+      allow="fullscreen"
+      sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups"
+    ></iframe>
+    
+    <div id="ad-panel">
+      <div class="ad-icon">
+        <i class="fas fa-ad"></i>
+      </div>
+      <h3>Want to Continue?</h3>
+      <p>Watch a short video to get extra lives or unlock special rewards!</p>
+      <div class="ad-timer" id="adTimer">Ad ready in <span id="timerCount">3</span>s</div>
+      <div class="ad-buttons">
+        <button id="watch-ad-btn" class="reward-btn">
+          <i class="fas fa-play-circle"></i> Watch Ad (30s)
+        </button>
+        <button id="close-btn" class="cancel-btn">
+          Not Now
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="error-message" id="errorMessage">
@@ -411,6 +552,7 @@
   <script>
     // DOM Elements
     const iframe = document.getElementById("gameIframe");
+    const unityFrame = document.getElementById("unity-frame");
     const container = document.getElementById("gameContainer");
     const overlay = document.getElementById("gameOverlay");
     const header = document.getElementById("gameHeader");
@@ -419,6 +561,12 @@
     const loadingSpinner = document.getElementById("loadingSpinner");
     const errorMessage = document.getElementById("errorMessage");
     const gameDescription = document.getElementById("gameDescription");
+    const adOverlay = document.getElementById("adOverlay");
+    const adPanel = document.getElementById("ad-panel");
+    const watchAdBtn = document.getElementById("watch-ad-btn");
+    const closeBtn = document.getElementById("close-btn");
+    const timerCount = document.getElementById("timerCount");
+    const adTimer = document.getElementById("adTimer");
 
     // Get URL parameters
     const params = new URLSearchParams(window.location.search);
@@ -429,12 +577,6 @@
 
     // Initialize game
     function initGame() {
-      if (gameUrl) {
-        iframe.src = gameUrl;
-      } else {
-        showError("No game specified");
-      }
-
       // Set page content
       const decodedTitle = decodeURIComponent(gameTitleParam);
       title.textContent = decodedTitle;
@@ -455,6 +597,19 @@
       iframe.onerror = function() {
         showError("Failed to load game");
       };
+
+      // Handle Unity frame load events
+      unityFrame.onload = function() {
+        loadingSpinner.style.display = "none";
+      };
+      
+      unityFrame.onerror = function() {
+        showError("Failed to load Unity game");
+      };
+
+      // Initially hide ad panel
+      adPanel.style.display = "none";
+      adOverlay.style.display = "none";
     }
 
     // Start game function
@@ -462,11 +617,20 @@
       document.querySelector('.play-btn').style.display = 'none';
       loadingSpinner.style.display = "block";
       
-      setTimeout(() => {
+      // Determine which iframe to show based on URL
+      if (gameUrl && gameUrl.includes('unity')) {
+        unityFrame.style.display = 'block';
+      } else if (gameUrl) {
+        iframe.src = gameUrl;
         iframe.style.display = 'block';
+      } else {
+        // Default to Unity game if no specific game URL
+        unityFrame.style.display = 'block';
+      }
+      
+      setTimeout(() => {
         overlay.classList.add("hidden");
         loadingSpinner.style.display = "none";
-        toggleFullscreen();
       }, 500);
     }
 
@@ -489,10 +653,15 @@
 
     // Restart game
     function restartGame() {
-      iframe.src = iframe.src;
+      if (unityFrame.style.display === 'block') {
+        unityFrame.src = unityFrame.src;
+      } else {
+        iframe.src = iframe.src;
+      }
       overlay.classList.remove("hidden");
       document.querySelector('.play-btn').style.display = 'flex';
       iframe.style.display = 'none';
+      unityFrame.style.display = 'none';
     }
 
     // Go back
@@ -506,6 +675,79 @@
       errorMessage.style.display = "block";
       overlay.style.display = "none";
     }
+
+    // Show ad panel with countdown
+    function showAdPanel() {
+      adOverlay.style.display = "flex";
+      adPanel.style.display = "block";
+      
+      // Disable buttons during countdown
+      watchAdBtn.disabled = true;
+      closeBtn.disabled = true;
+      watchAdBtn.style.opacity = "0.6";
+      
+      let count = 3;
+      timerCount.textContent = count;
+      
+      const countdown = setInterval(() => {
+        count--;
+        timerCount.textContent = count;
+        
+        if (count <= 0) {
+          clearInterval(countdown);
+          adTimer.style.display = "none";
+          watchAdBtn.disabled = false;
+          closeBtn.disabled = false;
+          watchAdBtn.style.opacity = "1";
+        }
+      }, 1000);
+    }
+
+    // Close ad panel
+    closeBtn.addEventListener("click", () => {
+      adPanel.style.display = "none";
+      adOverlay.style.display = "none";
+    });
+
+    // Watch ad button handler
+    watchAdBtn.addEventListener("click", () => {
+      // Here you would typically integrate with your ad SDK
+      console.log("Starting rewarded ad...");
+      
+      // Simulate ad loading
+      watchAdBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading Ad...';
+      watchAdBtn.disabled = true;
+      
+      // Simulate ad completion after 5 seconds
+      setTimeout(() => {
+        // Reward the player
+        console.log("Ad completed - rewarding player");
+        alert("Thanks for watching! You've been rewarded with 50 coins!");
+        
+        // Reset button
+        watchAdBtn.innerHTML = '<i class="fas fa-play-circle"></i> Watch Ad (30s)';
+        watchAdBtn.disabled = false;
+        
+        // Close ad panel
+        adPanel.style.display = "none";
+        adOverlay.style.display = "none";
+        
+        // Send message to game that reward was received
+        if (unityFrame.style.display === 'block') {
+          unityFrame.contentWindow.postMessage({ message: "reward_completed" }, "*");
+        }
+      }, 5000);
+    });
+
+    // Listen for messages from Unity iframe
+    window.addEventListener("message", (event) => {
+      console.log("Message received from Unity iframe:", event.data);
+
+      // Check if event.data is an object and message property equals "game_over"
+      if (event.data && event.data.message === "game_over") {
+        showAdPanel();
+      }
+    });
 
     // Keyboard shortcuts
     document.addEventListener('keydown', function(e) {
