@@ -3,135 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arcane Game Nexus | Dark Fantasy Game Portal</title>
-  <meta name="description" content="Enter a realm of dark fantasy and cartoon games. Play free online games in various categories including action, puzzle, adventure and more.">
+  <title>Cartoon Game Hub | Play Free Online Games</title>
+  <meta name="description" content="Play free online cartoon games in various categories including action, puzzle, adventure and more.">
   <link rel="stylesheet" href="styles.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:wght@400;600;700&family=Henny+Penny&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Luckiest+Guy&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="dark-overlay"></div>
-  <div class="floating-candles">
-    <div class="candle"></div>
-    <div class="candle"></div>
-    <div class="candle"></div>
-  </div>
-
   <header class="main-header">
     <div class="header-content">
       <div class="logo-container">
-        <h1 class="logo">Arcane Nexus</h1>
-        <p class="tagline">Where magic meets play!</p>
+        <h1 class="logo">Hllo Games</h1>
+        <p class="tagline">Where fun comes to play!</p>
       </div>
       
       <div id="player-info">
-        <div class="player-avatar" id="player-avatar">
-          <i class="fas fa-user-secret"></i>
-        </div>
-        <span id="player-name-display">Guest</span>
+        <span id="player-name-display"></span>
         <div class="auth-buttons">
           <button id="login-btn" class="auth-btn">
             <i class="fas fa-sign-in-alt"></i> Login
           </button>
           <button id="signup-btn" class="auth-btn primary">
-            <i class="fas fa-scroll"></i> Enroll
+            <i class="fas fa-user-plus"></i> Sign Up
           </button>
         </div>
       </div>
     </div>
     
     <nav class="category-nav">
-      <button class="category-btn active" data-category="all">
-        <i class="fas fa-dungeon"></i> All Spells
-      </button>
-      <button class="category-btn" data-category="action">
-        <i class="fas fa-swords"></i> Battle
-      </button>
-      <button class="category-btn" data-category="puzzle">
-        <i class="fas fa-puzzle-piece"></i> Riddles
-      </button>
-      <button class="category-btn" data-category="adventure">
-        <i class="fas fa-map-marked-alt"></i> Quests
-      </button>
-      <button class="category-btn" data-category="sports">
-        <i class="fas fa-ghost"></i> Specter Sports
-      </button>
-      <button class="category-btn" data-category="racing">
-        <i class="fas fa-broom"></i> Broom Races
-      </button>
+      <button class="category-btn active" data-category="all">All Games</button>
+      <button class="category-btn" data-category="action">Action</button>
+      <button class="category-btn" data-category="puzzle">Puzzle</button>
+      <button class="category-btn" data-category="adventure">Adventure</button>
+      <button class="category-btn" data-category="sports">Sports</button>
+      <button class="category-btn" data-category="racing">Racing</button>
     </nav>
   </header>
 
   <main>
     <section class="hero">
       <div class="hero-content">
-        <h2>Unleash the Arcane!</h2>
-        <p>Thousands of mystical games from across the realms await your command!</p>
+        <h2>Discover Wacky Cartoon Games!</h2>
+        <p>Thousands of free cartoon-themed games waiting for you!</p>
         <div class="search-container">
-          <input type="text" placeholder="Summon a game..." id="game-search">
-          <button class="search-btn"><i class="fas fa-crystal-ball"></i></button>
-        </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-number">1,287</span>
-            <span class="stat-label">Spells Cast</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">563</span>
-            <span class="stat-label>Active Wizards</span>
-          </div>
+          <input type="text" placeholder="Search games..." id="game-search">
+          <button class="search-btn"><i class="fas fa-search"></i></button>
         </div>
       </div>
       <div class="hero-decoration">
-        <div class="floating-rune"></div>
-        <div class="floating-rune"></div>
-        <div class="floating-skull"></div>
+        <div class="cartoon-cloud"></div>
+        <div class="cartoon-cloud"></div>
+        <div class="cartoon-star"></div>
       </div>
     </section>
 
     <section class="all-games">
-      <h3 class="section-title">
-        <i class="fas fa-book-dead"></i> Tome of Games
-        <span class="sort-controls">
-          Sort by: 
-          <select id="sort-games">
-            <option value="popular">Most Popular</option>
-            <option value="newest">Newest</option>
-            <option value="rating">Highest Rated</option>
-          </select>
-        </span>
-      </h3>
-      <div class="grid-container" id="game-list">
-        <!-- Games will be loaded here -->
-      </div>
-      <div class="pagination">
-        <button class="page-btn"><i class="fas fa-arrow-left"></i></button>
-        <span class="page-number">1</span>
-        <button class="page-btn"><i class="fas fa-arrow-right"></i></button>
-      </div>
-    </section>
-
-    <section class="featured-game">
-      <div class="featured-content">
-        <h3>Spell of the Day</h3>
-        <div class="featured-game-card">
-          <div class="featured-game-image"></div>
-          <div class="featured-game-info">
-            <h4>Warlock's Revenge</h4>
-            <div class="rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <span>4.7 (2.1k)</span>
-            </div>
-            <p>Embark on a dark journey to reclaim your stolen magic in this action-packed adventure.</p>
-            <button class="play-now-btn">Cast Now <i class="fas fa-hat-wizard"></i></button>
-          </div>
-        </div>
+      <h3 class="section-title"><i class="fas fa-gamepad"></i> All Cartoon Games</h3>
+      <div class="grid-container" id="game-list"></div>
+      <div class="cartoon-decoration">
+        <div class="cartoon-bubble"></div>
+        <div class="cartoon-bubble"></div>
       </div>
     </section>
   </main>
@@ -139,59 +71,33 @@
   <footer class="main-footer">
     <div class="footer-content">
       <div class="footer-section">
-        <h4>Arcane Nexus</h4>
-        <p>Your portal to mystical gaming since 1023 AE.</p>
-        <div class="newsletter">
-          <input type="email" placeholder="Your owl post address">
-          <button>Subscribe</button>
-        </div>
+        <h4>Cartoon Game Hub</h4>
+        <p>Your ultimate destination for free cartoon games since 2023.</p>
       </div>
       <div class="footer-section">
-        <h4>Quick Scrolls</h4>
+        <h4>Quick Links</h4>
         <ul>
-          <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="#"><i class="fas fa-fire"></i> Popular Spells</a></li>
-          <li><a href="#"><i class="fas fa-moon"></i> New Incantations</a></li>
-          <li><a href="#"><i class="fas fa-scroll"></i> Terms of Enchantment</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Popular Games</a></li>
+          <li><a href="#">New Releases</a></li>
+          <li><a href="#">Contact Us</a></li>
         </ul>
       </div>
       <div class="footer-section">
-        <h4>Join Our Coven</h4>
+        <h4>Connect With Us</h4>
         <div class="social-links">
           <a href="#"><i class="fab fa-facebook"></i></a>
           <a href="#"><i class="fab fa-twitter"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
           <a href="#"><i class="fab fa-discord"></i></a>
         </div>
-        <div class="app-links">
-          <button class="download-btn">
-            <i class="fab fa-google-play"></i> Google Play
-          </button>
-          <button class="download-btn">
-            <i class="fab fa-apple"></i> App Store
-          </button>
-        </div>
       </div>
     </div>
     <div class="copyright">
-      <p>&copy; 1023 AE Arcane Nexus. All spells reserved.</p>
+      <p>&copy; 2023 Cartoon Game Hub. All rights reserved.</p>
     </div>
-    <div class="footer-decoration">
-      <div class="floating-cauldron"></div>
-    </div>
+    <div class="footer-decoration"></div>
   </footer>
-
-  <div class="modal" id="login-modal">
-    <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <h3>Enter the Portal</h3>
-      <form id="login-form">
-        <input type="text" placeholder="Wizard Name" required>
-        <input type="password" placeholder="Secret Rune" required>
-        <button type="submit">Sign In</button>
-      </form>
-    </div>
-  </div>
 
   <script type="module" src="app.js"></script>
 </body>
