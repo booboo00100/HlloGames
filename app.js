@@ -85,11 +85,22 @@ async function loadFeaturedGames() {
   }
 }
 
-// Create game card element
+// Create game card element with size handling
 function createGameCard(game, container, isFeatured = false) {
   const a = document.createElement('a');
   a.href = `play.html?game=${encodeURIComponent(game.link)}&title=${encodeURIComponent(game.name)}&img=${encodeURIComponent(game.image)}&desc=${encodeURIComponent(game.description || '')}`;
-  a.className = `game-card ${game.size || 'small'} ${isFeatured ? 'featured' : ''}`;
+  
+  // Set size class based on game.size from Firebase
+  let sizeClass = '';
+  if (game.size === 'small') {
+    sizeClass = 'size-small';
+  } else if (game.size === 'medium') {
+    sizeClass = 'size-medium'; 
+  } else if (game.size === 'big') {
+    sizeClass = 'size-big';
+  }
+  
+  a.className = `game-card ${sizeClass} ${isFeatured ? 'featured' : ''}`;
   a.setAttribute('data-category', game.category || 'other');
 
   const img = document.createElement('img');
@@ -111,6 +122,7 @@ function createGameCard(game, container, isFeatured = false) {
   overlay.appendChild(title);
   overlay.appendChild(category);
   
+  // Only wrap in div if size is big (for special styling)
   if (game.size === 'big') {
     const wrapper = document.createElement('div');
     wrapper.className = 'game-image-wrapper';
