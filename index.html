@@ -3,11 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cartoon Game Hub | Play Free Online Games</title>
-  <meta name="description" content="Play free online cartoon games in various categories including action, puzzle, adventure and more.">
+  <title>Cartoon Game Hub | Play Free Online Cartoon Games for Kids & Adults</title>
+  <meta name="description" content="Play Top free online cartoon games - action, puzzle, adventure, sports & racing games. No downloads required. Fun for kids & adults!">
+  <meta name="keywords" content="cartoon games, free online games, kids games, action games, puzzle games, adventure games, sports games, racing games">
+  <meta name="author" content="Cartoon Game Hub">
+  <meta property="og:title" content="Cartoon Game Hub | Play Free Online Cartoon Games">
+  <meta property="og:description" content="1000+ free cartoon games for kids & adults. No downloads required!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hellogames.com">
+  <meta property="og:image" content="https://hellogames.com/images/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://hellogames.com" />
   <link rel="stylesheet" href="styles.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Luckiest+Guy&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Cartoon Game Hub",
+    "url": "https://hellogames.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://hellogames.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -21,17 +44,17 @@
       <div id="player-info">
         <span id="player-name-display"></span>
         <div class="auth-buttons">
-          <button id="login-btn" class="auth-btn">
+          <button id="login-btn" class="auth-btn" aria-label="Login to your game account">
             <i class="fas fa-sign-in-alt"></i> Login
           </button>
-          <button id="signup-btn" class="auth-btn primary">
+          <button id="signup-btn" class="auth-btn primary" aria-label="Sign up for free game account">
             <i class="fas fa-user-plus"></i> Sign Up
           </button>
         </div>
       </div>
     </div>
     
-    <nav class="category-nav">
+    <nav class="category-nav" aria-label="Game categories navigation">
       <button class="category-btn active" data-category="all">All Games</button>
       <button class="category-btn" data-category="action">Action</button>
       <button class="category-btn" data-category="puzzle">Puzzle</button>
@@ -47,8 +70,9 @@
         <h2>Discover Wacky Cartoon Games!</h2>
         <p>Thousands of free cartoon-themed games waiting for you!</p>
         <div class="search-container">
-          <input type="text" placeholder="Search games..." id="game-search">
-          <button class="search-btn"><i class="fas fa-search"></i></button>
+          <label for="game-search" class="sr-only">Search for games</label>
+          <input type="text" placeholder="Search games..." id="game-search" aria-label="Search cartoon games">
+          <button class="search-btn" aria-label="Search games"><i class="fas fa-search"></i></button>
         </div>
       </div>
       <div class="hero-decoration">
@@ -77,28 +101,37 @@
       <div class="footer-section">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Popular Games</a></li>
-          <li><a href="#">New Releases</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="/" aria-label="Home">Home</a></li>
+          <li><a href="/popular-games" aria-label="Popular Games">Popular Games</a></li>
+          <li><a href="/new-releases" aria-label="New Game Releases">New Releases</a></li>
+          <li><a href="/contact" aria-label="Contact Us">Contact Us</a></li>
         </ul>
       </div>
       <div class="footer-section">
         <h4>Connect With Us</h4>
         <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-discord"></i></a>
+          <a href="https://facebook.com/hellogames" aria-label="Our Facebook page"><i class="fab fa-facebook"></i></a>
+          <a href="https://twitter.com/hellogames" aria-label="Our Twitter profile"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com/hellogames" aria-label="Our Instagram page"><i class="fab fa-instagram"></i></a>
+          <a href="https://discord.gg/hellogames" aria-label="Our Discord server"><i class="fab fa-discord"></i></a>
         </div>
       </div>
     </div>
     <div class="copyright">
-      <p>&copy; 2023 Cartoon Game Hub. All rights reserved.</p>
+      <p>&copy; 2023 Cartoon Game Hub. All rights reserved. <a href="/privacy" aria-label="Privacy Policy">Privacy Policy</a></p>
     </div>
     <div class="footer-decoration"></div>
   </footer>
 
   <script type="module" src="app.js"></script>
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
 </body>
 </html>
