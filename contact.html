@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Cartoon Game Hub</title>
+  <meta name="description" content="Get in touch with Cartoon Game Hub. We'd love to hear your feedback, game suggestions, or help with any issues.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Luckiest+Guy&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <div class="logo-container">
+        <h1 class="logo">Hllo Games</h1>
+        <p class="tagline">Where fun comes to play!</p>
+      </div>
+      <div id="player-info">
+        <span id="player-name-display"></span>
+        <div class="auth-buttons">
+          <button id="login-btn" class="auth-btn" aria-label="Login to your game account">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+          <button id="signup-btn" class="auth-btn primary" aria-label="Sign up for free game account">
+            <i class="fas fa-user-plus"></i> Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="category-nav" aria-label="Main navigation">
+      <a href="/" class="nav-link" aria-label="Home"><i class="fas fa-home"></i> Home</a>
+      <a href="/games" class="nav-link" aria-label="All Games"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="/contact" class="nav-link active" aria-label="Contact Us"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="/faq" class="nav-link" aria-label="FAQ"><i class="fas fa-question-circle"></i> FAQ</a>
+    </nav>
+  </header>
+
+  <main class="contact-page">
+    <section class="contact-hero">
+      <div class="hero-content">
+        <h1><i class="fas fa-headset"></i> Contact Cartoon Game Hub</h1>
+        <p>We're here to help! Reach out for game suggestions, technical support, or just to say hello.</p>
+      </div>
+      <div class="hero-decoration">
+        <div class="cartoon-cloud"></div>
+        <div class="cartoon-star"></div>
+      </div>
+    </section>
+
+    <section class="contact-container">
+      <div class="contact-methods">
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>Email Us</h3>
+          <p>For general inquiries and support:</p>
+          <a href="mailto:support@hllogames.com" class="contact-link">support@hllogames.com</a>
+          <p>For business partnerships:</p>
+          <a href="mailto:partners@hllogames.com" class="contact-link">partners@hllogames.com</a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-comment-dots"></i>
+          </div>
+          <h3>Live Chat</h3>
+          <p>Available 9AM-5PM EST, Monday-Friday</p>
+          <button id="live-chat-btn" class="chat-btn" aria-label="Start live chat with support">
+            <i class="fas fa-comments"></i> Start Chat
+          </button>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-hashtag"></i>
+          </div>
+          <h3>Social Media</h3>
+          <p>Connect with us on:</p>
+          <div class="social-links">
+            <a href="https://facebook.com/hellogames" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com/hellogames" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/hellogames" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://discord.gg/hellogames" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required aria-required="true">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required aria-required="true">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required aria-required="true">
+              <option value="">Select a topic</option>
+              <option value="support">Technical Support</option>
+              <option value="suggestion">Game Suggestion</option>
+              <option value="bug">Report a Bug</option>
+              <option value="partnership">Business Inquiry</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+          </div>
+          
+          <button type="submit" class="submit-btn" aria-label="Send message">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="faq-preview">
+      <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+      <div class="faq-items">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq1">
+            How do I reset my password?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faq1" class="faq-answer">
+            <p>You can reset your password by clicking on "Forgot Password" on the login page. We'll send a password reset link to your registered email address.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq2">
+            Are your games really free?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faq2" class="faq-answer">
+            <p>Yes! All games on Cartoon Game Hub are completely free to play. Some games may offer optional in-game purchases, but these are never required.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq3">
+            Can I suggest a new game?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faq3" class="faq-answer">
+            <p>Absolutely! We love hearing game suggestions from our players. Use the contact form above or email us at suggestions@hllogames.com.</p>
+          </div>
+        </div>
+      </div>
+      <a href="/faq" class="see-all-faq" aria-label="View all frequently asked questions">See All FAQ <i class="fas fa-arrow-right"></i></a>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Cartoon Game Hub</h4>
+        <p>Your ultimate destination for free cartoon games since 2023.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="https://facebook.com/hellogames" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://twitter.com/hellogames" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com/hellogames" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://discord.gg/hellogames" aria-label="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 Cartoon Game Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="contact.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+</html>
