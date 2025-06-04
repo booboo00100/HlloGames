@@ -176,7 +176,51 @@ function init() {
   loginBtn.addEventListener('click', () => {
     window.location.href = 'login.html';
   });
+  
 }
 
 // Start the app
 document.addEventListener('DOMContentLoaded', init);
+
+
+
+// Cookie Consent Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const cookieBanner = document.getElementById('cookie-consent');
+  const acceptBtn = document.getElementById('accept-cookies');
+  const rejectBtn = document.getElementById('reject-cookies');
+  
+  // Check if user has already made a choice
+  if (!getCookie('cookie_consent')) {
+    // Show banner if no choice was made
+    cookieBanner.style.display = 'block';
+    
+    // Set a cookie that expires in 30 days
+    const setConsentCookie = (value) => {
+      const date = new Date();
+      date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
+      document.cookie = `cookie_consent=${value}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
+      
+      // If accepted, also set the Google Analytics cookie
+      if (value === 'accepted') {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA ID
+      }
+      
+      cookieBanner.style.display = 'none';
+    };
+    
+    // Button event listeners
+    acceptBtn.addEventListener('click', () => setConsentCookie('accepted'));
+    rejectBtn.addEventListener('click', () => setConsentCookie('rejected'));
+  }
+  
+  // Helper function to get cookie value
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+});
