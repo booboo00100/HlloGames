@@ -589,6 +589,7 @@ p {
 }
 
 
+/* Floating Install Button */
 .install-btn {
   position: fixed;
   bottom: 20px;
@@ -600,7 +601,7 @@ p {
   border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   font-family: 'Poppins', sans-serif;
   transition: all 0.3s ease;
@@ -609,9 +610,10 @@ p {
 .install-btn:hover {
   background-color: #e65c00;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
+/* Responsive Button Adjustments */
 @media (max-width: 768px) {
   .install-btn {
     bottom: 70px;
@@ -620,31 +622,43 @@ p {
     font-size: 14px;
   }
 }
+
+/* Install Banner (Bottom Bar) */
 .install-banner {
-  display: none;
+  display: none; /* Set to 'flex' via JavaScript to show */
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #FF6B00;
+  background: #ff6b00;
   color: white;
   padding: 15px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
 }
 
+/* Buttons inside banner */
 .banner-btn {
   padding: 8px 16px;
   margin-left: 10px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  font-family: inherit;
+  transition: background 0.3s ease;
 }
 
+/* Primary style for the main call-to-action button */
 .banner-btn.primary {
-  background: rgb(0, 0, 0);
-  color: #FF6B00;
+  background: #000000;
+  color: #ff6b00;
   font-weight: bold;
+}
+
+.banner-btn.primary:hover {
+  background: #222;
 }

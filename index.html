@@ -169,13 +169,7 @@
         </div>
       </div>
     </div>
-    <div id="installBanner" class="install-banner">
-      <p>Install Hllo Games for faster access and offline play!</p>
-      <div>
-        <button id="installNow" class="banner-btn primary">Install Now</button>
-        <button id="installLater" class="banner-btn">Later</button>
-      </div>
-    </div>
+  
     <nav class="category-nav" aria-label="Game categories navigation">
       <button class="category-btn active" data-category="all">All Online Games</button>
       <button class="category-btn" data-category="action">Action Games</button>
@@ -367,5 +361,22 @@
       </div>
     </div>
   </div>
+    <div id="installBanner" class="install-banner">
+      <p>Install Hllo Games for faster access and offline play!</p>
+      <div>
+        <button id="installNow" class="banner-btn primary">Install Now</button>
+        <button id="installLater" class="banner-btn">Later</button>
+      </div>
+    </div>
+    <script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const banner = document.querySelector('.install-banner');
+      if (banner) {
+        banner.style.display = 'flex';
+      }
+    }, 10000); // 10,000 milliseconds = 10 seconds
+  });
+</script>
 </body>
 </html>
