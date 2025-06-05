@@ -2,40 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Free Online Cartoon Games | Play 1000+ Browser Games for Kids & Adults</title>
-  <meta name="description" content="Play 1000+ free online cartoon games - action, puzzle, adventure, sports & racing games. No downloads required. Instant play in your browser! Best collection of cartoon games online.">
-  <meta name="keywords" content="cartoon games, free online games, kids games, action games, puzzle games, adventure games, sports games, racing games, browser games, play games online, no download games">
-  <meta name="author" content="Cartoon Game Hub">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover">
+  <title>Free Cartoon Games Online | HTML5 Browser Games (No Download)</title>
+  <meta name="description" content="Play the best free cartoon games online! 1000+ HTML5 browser games for kids & adults - action, puzzle, sports & more. No downloads required, play instantly on any device!">
+  <meta name="keywords" content="free cartoon games, online games for kids, HTML5 games, browser games, no download games, action games, puzzle games, adventure games, sports games, racing games, girls games, play games online">
+  <meta name="author" content="Hllo Games">
   
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="imges\Logosite.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="imges\Logosite.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="imges\Logosite.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-96x96.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="imges\safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="mask-icon" href="icons/favicon.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
   
   <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="Free Online Cartoon Games | Play 1000+ Browser Games">
-  <meta property="og:description" content="Instant play 1000+ free online cartoon games - no downloads needed! Best collection of browser games for kids and adults.">
+  <meta property="og:title" content="Free Cartoon Games Online | 1000+ HTML5 Browser Games">
+  <meta property="og:description" content="Play the best free cartoon games online! 1000+ HTML5 browser games for kids & adults - no downloads required.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hllogames.com">
   <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/test1-9ec8d.appspot.com/o/og-image.jpg?alt=media&token=450dabdc-eba2-4ce2-8b27-6ab66958ec50">
-  <meta property="og:site_name" content="Cartoon Game Hub">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Hllo Games - Play Free Cartoon Games Online">
+  <meta property="og:site_name" content="Hllo Games - Free Cartoon Games">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free Online Cartoon Games | Play 1000+ Browser Games">
-  <meta name="twitter:description" content="Instant play 1000+ free online cartoon games - no downloads needed!">
+  <meta name="twitter:title" content="Free Cartoon Games Online | 1000+ HTML5 Browser Games">
+  <meta name="twitter:description" content="Play the best free cartoon games online! 1000+ HTML5 browser games - no downloads required.">
   <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/test1-9ec8d.appspot.com/o/og-image.jpg?alt=media&token=450dabdc-eba2-4ce2-8b27-6ab66958ec50">
+  <meta name="twitter:image:alt" content="Screenshot of popular cartoon games from Hllo Games">
+  <meta name="twitter:site" content="@hllogames">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hllo Games">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon.png">
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://hllogames.com" />
   
   <!-- Preload important resources -->
   <link rel="preload" href="styles.css" as="style">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Luckiest+Guy&family=Poppins:wght@400;600;700&display=swap" as="style">
   
@@ -49,7 +67,7 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Cartoon Game Hub",
+    "name": "Hllo Games",
     "url": "https://hllogames.com",
     "description": "Play free online cartoon games instantly in your browser - no downloads required!",
     "potentialAction": {
@@ -73,6 +91,56 @@
       "price": "0",
       "priceCurrency": "USD"
     }
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Game",
+          "name": "Cartoon Adventure Quest",
+          "description": "Exciting platform adventure game with cartoon characters",
+          "gamePlatform": "Web Browser"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Game",
+          "name": "Puzzle Mania",
+          "description": "Challenging cartoon puzzle game for all ages",
+          "gamePlatform": "Web Browser"
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://hllogames.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Online Games",
+        "item": "https://hllogames.com/online-games"
+      }
+    ]
   }
   </script>
   
@@ -101,7 +169,13 @@
         </div>
       </div>
     </div>
-    
+    <div id="installBanner" class="install-banner">
+      <p>Install Hllo Games for faster access and offline play!</p>
+      <div>
+        <button id="installNow" class="banner-btn primary">Install Now</button>
+        <button id="installLater" class="banner-btn">Later</button>
+      </div>
+    </div>
     <nav class="category-nav" aria-label="Game categories navigation">
       <button class="category-btn active" data-category="all">All Online Games</button>
       <button class="category-btn" data-category="action">Action Games</button>
@@ -116,8 +190,8 @@
   <main>
     <section class="hero">
       <div class="hero-content">
-        <h2>Play Free Cartoon Games Online!</h2>
-        <p>1000+ browser games - no downloads needed! Play instantly on any device.</p>
+        <h1>Free Online Cartoon Games - Play Instantly in Your Browser</h1>
+        <h2>  Games With No Downloads Required</h2>
         <div class="search-container">
           <label for="game-search" class="sr-only">Search for online games</label>
           <input type="text" placeholder="Search online games..." id="game-search" aria-label="Search cartoon games online">
@@ -132,14 +206,14 @@
     </section>
 
     <section class="popular-games">
-      <h3 class="section-title"><i class="fas fa-fire"></i> Most Popular Online Games</h3>
+      <h2 class="section-title"><i class="fas fa-fire"></i> Most Popular Cartoon Games Online</h2>
       <div class="carousel-container" id="popular-games">
         <!-- Popular games will be loaded here -->
       </div>
     </section>
 
     <section class="all-games">
-      <h3 class="section-title"><i class="fas fa-gamepad"></i> All Free Online Games</h3>
+      <h2 class="section-title"><i class="fas fa-gamepad"></i> Browse All Free Cartoon Games</h2>
       <div class="grid-container" id="game-list"></div>
       <div class="cartoon-decoration">
         <div class="cartoon-bubble"></div>
@@ -149,29 +223,61 @@
 
     <section class="benefits">
       <div class="benefits-container">
-        <h3>Why Play Our Online Games?</h3>
+        <h2>Why Play Our Online Games?</h2>
         <div class="benefits-grid">
           <div class="benefit-item">
             <i class="fas fa-bolt"></i>
-            <h4>Instant Play</h4>
+            <h3>Instant Play</h3>
             <p>No downloads or installations needed - play directly in your browser</p>
           </div>
           <div class="benefit-item">
             <i class="fas fa-mobile-alt"></i>
-            <h4>Mobile Friendly</h4>
+            <h3>Mobile Friendly</h3>
             <p>Games work perfectly on phones, tablets and computers</p>
           </div>
           <div class="benefit-item">
             <i class="fas fa-lock"></i>
-            <h4>Safe for Kids</h4>
+            <h3>Safe for Kids</h3>
             <p>Family-friendly content with no inappropriate material</p>
           </div>
           <div class="benefit-item">
             <i class="fas fa-sync-alt"></i>
-            <h4>Daily Updates</h4>
+            <h3>Daily Updates</h3>
             <p>New games added regularly to keep the fun fresh</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>Are these games really free to play?</h3>
+        <p>Yes! All our cartoon games are completely free to play with no hidden costs. We support our site through non-intrusive ads.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I need to download anything?</h3>
+        <p>No downloads required! Our games use HTML5 technology to run directly in your web browser on any device.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are these games suitable for kids?</h3>
+        <p>Absolutely! We carefully select family-friendly cartoon games that are appropriate for children while still being fun for adults.</p>
+      </div>
+    </section>
+
+    <section class="blog-preview">
+      <h2>Cartoon Gaming Tips & News</h2>
+      <div class="blog-articles">
+        <article>
+          <h3>Top 10 Cartoon Adventure Games of 2023</h3>
+          <p>Discover the most exciting new cartoon adventure games added to our collection this year.</p>
+          <a href="/blog/top-adventure-games-2023">Read More</a>
+        </article>
+        <article>
+          <h3>How Browser Games Have Evolved</h3>
+          <p>From Flash to HTML5 - the technology behind modern web-based games.</p>
+          <a href="/blog/browser-game-evolution">Read More</a>
+        </article>
       </div>
     </section>
   </main>
@@ -179,16 +285,16 @@
   <footer class="main-footer">
     <div class="footer-content">
       <div class="footer-section">
-        <h4>Cartoon Game Hub</h4>
+        <h3>Hllo Games</h3>
         <p>Your #1 destination for free online cartoon games since 2023.</p>
         <div class="app-links">
           <p>Get our app:</p>
-          <a href="#" aria-label="Download on App Store"><img src="/images/app-store.png" alt="App Store" width="120"></a>
-          <a href="#" aria-label="Get it on Google Play"><img src="/images/google-play.png" alt="Google Play" width="120"></a>
+          <a href="#" aria-label="Download on App Store"><img src="/images/app-store.png" alt="Download Hllo Games on the Apple App Store" width="120" loading="lazy"></a>
+          <a href="#" aria-label="Get it on Google Play"><img src="/images/google-play.png" alt="Get Hllo Games on Google Play Store" width="120" loading="lazy"></a>
         </div>
       </div>
       <div class="footer-section">
-        <h4>Game Categories</h4>
+        <h3>Game Categories</h3>
         <ul>
           <li><a href="/action-games" aria-label="Action Games Online">Action Games</a></li>
           <li><a href="/puzzle-games" aria-label="Puzzle Games Online">Puzzle Games</a></li>
@@ -199,7 +305,7 @@
         </ul>
       </div>
       <div class="footer-section">
-        <h4>Quick Links</h4>
+        <h3>Quick Links</h3>
         <ul>
           <li><a href="/" aria-label="Home">Home</a></li>
           <li><a href="/popular-games" aria-label="Popular Online Games">Popular Games</a></li>
@@ -210,7 +316,7 @@
         </ul>
       </div>
       <div class="footer-section">
-        <h4>Connect With Us</h4>
+        <h3>Connect With Us</h3>
         <div class="social-links">
           <a href="https://facebook.com/hellogames" aria-label="Our Facebook page"><i class="fab fa-facebook"></i></a>
           <a href="https://twitter.com/hellogames" aria-label="Our Twitter profile"><i class="fab fa-twitter"></i></a>
@@ -220,7 +326,7 @@
           <a href="https://youtube.com/hellogames" aria-label="Our YouTube channel"><i class="fab fa-youtube"></i></a>
         </div>
         <div class="newsletter">
-          <h5>Get New Game Alerts</h5>
+          <h4>Get New Game Alerts</h4>
           <form id="newsletter-form">
             <label for="newsletter-email" class="sr-only">Email for newsletter</label>
             <input type="email" id="newsletter-email" placeholder="Your email" required>
@@ -230,7 +336,7 @@
       </div>
     </div>
     <div class="copyright">
-      <p>&copy; 2023 Cartoon Game Hub. All rights reserved. 
+      <p>&copy; 2023 Hllo Games. All rights reserved. 
         <a href="/PrivacyPolicy.html" aria-label="Privacy Policy">Privacy Policy</a> | 
         <a href="/terms.html" aria-label="Terms of Service">Terms</a> | 
         <a href="/dmca.html" aria-label="DMCA Policy">DMCA</a> | 
@@ -251,7 +357,7 @@
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
   </script>
-  
+
   <!-- Cookie Consent -->
   <div id="cookie-consent" class="cookie-consent-banner">
     <div class="cookie-content">

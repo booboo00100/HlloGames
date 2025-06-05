@@ -224,3 +224,107 @@ document.addEventListener('DOMContentLoaded', function() {
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 });
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful');
+      })
+      .catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  });
+}
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      })
+      .catch(function(error) {
+        console.log('ServiceWorker registration failed: ', error);
+      });
+  });
+}
+
+
+
+// PWA Installation Handling
+let deferredPrompt;
+const installButton = document.getElementById('installBtn');
+const installBanner = document.getElementById('installBanner');
+
+// Only show install elements if they exist
+if (installButton || installBanner) {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the default prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    
+    // Show install button if it exists
+    if (installButton) {
+      installButton.style.display = 'block';
+      installButton.addEventListener('click', installPWA);
+    }
+    
+    // Show banner if it exists (optional)
+    if (installBanner) {
+      installBanner.style.display = 'flex';
+      document.getElementById('installLater').addEventListener('click', () => {
+        installBanner.style.display = 'none';
+      });
+    }
+  });
+}
+
+function installPWA() {
+  if (!deferredPrompt) {
+    console.log('No install prompt available');
+    return;
+  }
+
+  // Show the install prompt
+  deferredPrompt.prompt();
+  
+  // Wait for the user to respond to the prompt
+  deferredPrompt.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+      // Hide the install button/banner after successful installation
+      if (installButton) installButton.style.display = 'none';
+      if (installBanner) installBanner.style.display = 'none';
+    } else {
+      console.log('User dismissed the install prompt');
+    }
+    
+    // Clear the deferredPrompt variable
+    deferredPrompt = null;
+  });
+}
+
+// Track successful installation
+window.addEventListener('appinstalled', () => {
+  console.log('PWA was installed');
+  // You can send analytics here
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'pwa_installed');
+  }
+});
+
+// Check if the app is running as a PWA
+function isRunningAsPWA() {
+  return window.matchMedia('(display-mode: standalone)').matches || 
+         window.navigator.standalone ||
+         document.referrer.includes('android-app://');
+}
+
+// Hide install elements if already running as PWA
+if (isRunningAsPWA()) {
+  if (installButton) installButton.style.display = 'none';
+  if (installBanner) installBanner.style.display = 'none';
+}
