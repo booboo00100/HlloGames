@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getFirestore, collection, getDocs, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
   authDomain: "hellogames-3566b.firebaseapp.com",
@@ -229,15 +230,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Register Service Worker (only once)
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful with scope:', registration.scope);
-      })
-      .catch(err => {
-        console.log('ServiceWorker registration failed:', err);
-      });
-  });
+  navigator.serviceWorker.register('./sw.js')
+    .then(reg => {
+      console.log('✅ Service Worker registered:', reg.scope);
+    })
+    .catch(err => {
+      console.error('❌ Service Worker registration failed:', err);
+    });
 }
 
 // PWA Installation Handling
@@ -258,13 +257,12 @@ function hideInstallUI() {
 }
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // Prevent automatic prompt
-  deferredPrompt = e;  // Save the event for triggering later
+  console.log(e);
+  console.log('✅ beforeinstallprompt fired');
+  e.preventDefault();
+  deferredPrompt = e;
 
-  // Show install UI after 10 seconds
-  setTimeout(() => {
-    showInstallUI();
-  }, 10000);
+  installButton.style.display = 'block';
 });
 
 // Install button click handler

@@ -4,23 +4,26 @@ const urlsToCache = [
   '/index.html',
   '/styles.css',
   '/app.js',
-  '/images/Logosite.png', // ✅ Fixed path spelling (was `/imges`)
-  // Add more assets like icons, fonts, manifest, etc.
+  '/manifest.json',
+  '/imges/Logosite.png',
 ];
 
-// Install event: Pre-cache critical assets
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('[ServiceWorker] Caching app shell');
-        return cache.addAll(urlsToCache);
+      .then(async cache => {
+        console.log('[ServiceWorker] Attempting to cache:', urlsToCache);
+        try {
+          await cache.addAll(urlsToCache);
+          console.log('[ServiceWorker] All files cached successfully ✅');
+        } catch (err) {
+          console.error('[ServiceWorker] Failed to cache:', err);
+        }
       })
   );
-  self.skipWaiting(); // Activate worker immediately
+  self.skipWaiting();
 });
 
-// Activate event: Clear old caches
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -35,26 +38,20 @@ self.addEventListener('activate', event => {
       )
     )
   );
-  self.clients.claim(); // Take control of all open clients
+  self.clients.claim();
 });
 
-// Fetch event: Serve from cache or fallback to network
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      // Serve from cache if available
       if (response) return response;
 
-      // Else fetch and optionally cache new request
-      return fetch(event.request)
-        .then(networkResponse => {
-          // Optionally cache dynamic assets here if needed
-          return networkResponse;
+      return fetch(event.request).catch(() =>
+        new Response('Offline and no cached version available.', {
+          status: 503,
+          statusText: 'Offline fallback not found'
         })
-        .catch(() => {
-          // Optionally return a fallback offline page/image
-          return caches.match('/offline.html'); // if you create one
-        });
+      );
     })
   );
 });
