@@ -1,0 +1,20 @@
+# Category-level redirects (e.g., /action-games → /action-games.html)
+# Only triggered if it doesn't already end in .html
+/action-games          /action-games.html          301
+/puzzle-games          /puzzle-games.html          301
+/adventure-games       /adventure-games.html       301
+/sports-games          /sports-games.html          301
+/racing-games          /racing-games.html          301
+/girls-games           /girls-games.html           301
+
+# Game-level redirects (e.g., /action-games/game → /action-games/game.html)
+# Wildcard-based redirection for games inside categories
+/action-games/:game        /action-games/:game.html        301
+/puzzle-games/:game        /puzzle-games/:game.html        301
+/adventure-games/:game     /adventure-games/:game.html     301
+/sports-games/:game        /sports-games/:game.html        301
+/racing-games/:game        /racing-games/:game.html        301
+/girls-games/:game         /girls-games/:game.html         301
+
+# Dynamic game route using slug (e.g., /g/Subway%20Surfers → /game-template.html)
+/g/:name     /game-template.html    200

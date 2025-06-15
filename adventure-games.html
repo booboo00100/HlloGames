@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
-  <title>Free Online Action Games | Cartoon Adventure Games | Hllo Games</title>
-  <meta name="description" content="Play the best free cartoon action games online! Exciting adventure, fighting and platform games for kids and adults. No downloads required!">
-  <meta name="keywords" content="free action games, online adventure games, cartoon fighting games, platform games, browser action games, no download games">
-  <link rel="canonical" href="https://hllogames.com/action-games" />
+  <title>Free Online Adventure Games | Epic Quests & Explorations | Hllo Games</title>
+  <meta name="description" content="Embark on epic journeys with our free online adventure games! Explore magical worlds, solve ancient mysteries, and complete thrilling quests. No downloads required!">
+  <meta name="keywords" content="free adventure games, online quest games, exploration games, story games, RPG adventures, browser adventure games">
+  <link rel="canonical" href="https://hllogames.com/adventure-games" />
   
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="icons/web-app-manifest-192x192.png">
@@ -14,44 +14,42 @@
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-96x96.png">
   
   <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="Free Online Action Games | Cartoon Adventure Games">
-  <meta property="og:description" content="Play the best free cartoon action games online! Exciting adventure, fighting and platform games.">
+  <meta property="og:title" content="Free Online Adventure Games | Epic Quests & Explorations">
+  <meta property="og:description" content="Embark on epic journeys with our free online adventure games! Explore magical worlds and solve ancient mysteries.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://hllogames.com/action-games">
-  <meta property="og:image" content="https://hllogames.com/images/action-games-og.jpg">
+  <meta property="og:url" content="https://hllogames.com/adventure-games">
+  <meta property="og:image" content="https://hllogames.com/images/adventure-games-og.jpg">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="style.css" />
   <style>
     :root {
-      --action-color: #e74c3c;
-      --action-dark: #c0392b;
-      --action-light: #ff6b6b;
+      --adventure-color: #3498db;
+      --adventure-dark: #2980b9;
+      --adventure-light: #5dade2;
+      --adventure-bg: #f5f9fc;
+      --text-dark: #2c3e50;
     }
     
     body {
       margin: 0;
       font-family: 'Poppins', Arial, sans-serif;
       min-height: 100vh;
-      background: linear-gradient(-45deg, #2c3e50, #e74c3c, #3498db, #2c3e50);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: #fff;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      background-color: var(--adventure-bg);
+      background-image: radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 80%, rgba(41, 128, 185, 0.1) 0%, transparent 20%);
+      color: var(--text-dark);
     }
 
     .header {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(255, 255, 255, 0.95);
       padding: 15px 0;
       position: sticky;
       top: 0;
       z-index: 100;
       backdrop-filter: blur(5px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 3px solid var(--adventure-light);
     }
 
     .header-content {
@@ -68,7 +66,7 @@
       align-items: center;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: var(--action-color);
+      background-color: var(--adventure-color);
       color: white;
       text-decoration: none;
       border-radius: 30px;
@@ -77,7 +75,7 @@
     }
 
     .back-button:hover {
-      background-color: var(--action-dark);
+      background-color: var(--adventure-dark);
       transform: translateY(-2px);
       box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
@@ -90,10 +88,13 @@
       text-align: center;
       margin: 30px 0;
       font-size: 2.5rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      color: var(--adventure-dark);
       position: relative;
       display: inline-block;
       padding: 0 20px;
+      background: linear-gradient(to right, #3498db, #2c3e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     #category-title:after {
@@ -104,15 +105,15 @@
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: var(--action-light);
+      background: var(--adventure-light);
       border-radius: 2px;
     }
 
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+      padding: 30px;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -121,38 +122,40 @@
       position: relative;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.3s;
+      transition: all 0.3s;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      background: white;
+      border: 1px solid rgba(52, 152, 219, 0.2);
     }
 
     .game-card:hover {
-      transform: translateY(-5px) scale(1.03);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(41, 128, 185, 0.2);
+      border-color: var(--adventure-light);
     }
 
     .game-card img {
       width: 100%;
-      height: 180px;
+      height: 220px;
       object-fit: cover;
       display: block;
-      transition: transform 0.3s;
+      transition: transform 0.5s;
     }
 
     .game-card:hover img {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .game-title-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      color: #fff;
-      padding: 15px 10px;
-      font-weight: 600;
+      position: relative;
+      padding: 15px;
+      background: white;
       text-align: center;
+      font-weight: 600;
+      color: var(--text-dark);
+      border-top: 1px solid #eee;
     }
 
     .category-description {
@@ -162,40 +165,86 @@
       text-align: center;
       font-size: 1.1rem;
       line-height: 1.6;
+      color: var(--text-dark);
     }
 
     .popular-tag {
       position: absolute;
       top: 10px;
       right: 10px;
-      background: var(--action-color);
+      background: var(--adventure-color);
       color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
+      padding: 6px 10px;
+      border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       z-index: 1;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .game-length {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      z-index: 1;
+    }
+
+    .loading-spinner {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px;
+      color: var(--adventure-dark);
+      font-size: 1.2rem;
+    }
+
+    .loading-spinner i {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .adventure-decoration {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 3rem;
+      color: rgba(52, 152, 219, 0.1);
+      z-index: -1;
     }
 
     @media (max-width: 768px) {
       .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 20px;
+        padding: 20px;
       }
       
       #category-title {
         font-size: 2rem;
       }
+      
+      .game-card img {
+        height: 160px;
+      }
     }
 
     @media (max-width: 480px) {
       .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
       }
       
       .game-card img {
-        height: 150px;
+        height: 140px;
       }
     }
   </style>
@@ -206,15 +255,19 @@
       <a href="https://hllogames.com/" class="back-button">
         <i class="fas fa-arrow-left"></i> Back to Home
       </a>
-      <h1 id="category-title">Action Games</h1>
+      <h1 id="category-title">Adventure Games</h1>
     </div>
   </header>
 
   <div class="category-description">
-    <p>Get ready for non-stop excitement with our collection of free online action games! Battle enemies, complete missions, and test your reflexes with these thrilling cartoon adventures. Perfect for kids and adults who love fast-paced gameplay.</p>
+    <p>Embark on unforgettable journeys with our collection of free online adventure games! Explore mysterious islands, solve ancient puzzles, and complete epic quests in these immersive story-driven experiences. Perfect for players who love exploration and discovery.</p>
   </div>
 
   <main class="grid-container" id="game-list"></main>
+
+  <div class="adventure-decoration">
+    <i class="fas fa-map-marked-alt"></i>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
@@ -235,16 +288,15 @@
 
     const gameList = document.getElementById('game-list');
 
-    async function loadActionGames() {
+    async function loadAdventureGames() {
       try {
-        gameList.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading action games...</div>';
+        gameList.innerHTML = '<div class="loading-spinner"><i class="fas fa-compass"></i> Loading adventure games...</div>';
         
-        // Query specifically for action games
-        const q = query(collection(db, "games"), where("category", "==", "action"));
+        const q = query(collection(db, "games"), where("category", "==", "adventure"));
         const querySnapshot = await getDocs(q);
         
         if (querySnapshot.empty) {
-          gameList.innerHTML = '<p class="no-games">No action games found. Check back soon!</p>';
+          gameList.innerHTML = '<p class="no-games" style="grid-column:1/-1;text-align:center;">No adventure games found. New quests coming soon!</p>';
           return;
         }
 
@@ -258,7 +310,7 @@
 
       } catch (error) {
         console.error("Error loading games: ", error);
-        gameList.innerHTML = '<p class="error-message">Oops! Couldn\'t load games. Please try again later.</p>';
+        gameList.innerHTML = '<p class="error-message" style="grid-column:1/-1;text-align:center;color:var(--adventure-dark);">Oops! Couldn\'t load adventure games. Please try again later.</p>';
       }
     }
 
@@ -287,8 +339,16 @@
       if (game.popular) {
         const popularTag = document.createElement('span');
         popularTag.className = 'popular-tag';
-        popularTag.innerHTML = '<i class="fas fa-fire"></i> Popular';
+        popularTag.innerHTML = '<i class="fas fa-crown"></i> Epic';
         imgWrapper.appendChild(popularTag);
+      }
+      
+      // Add game length indicator for adventure games
+      if (game.length) {
+        const lengthTag = document.createElement('span');
+        lengthTag.className = 'game-length';
+        lengthTag.innerHTML = `<i class="fas fa-clock"></i> ${game.length}`;
+        imgWrapper.appendChild(lengthTag);
       }
       
       a.appendChild(imgWrapper);
@@ -296,7 +356,7 @@
     }
 
     // Load games when page loads
-    document.addEventListener('DOMContentLoaded', loadActionGames);
+    document.addEventListener('DOMContentLoaded', loadAdventureGames);
   </script>
 </body>
 </html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+  <title>Free Online Girls Games | Fashion, Makeover & Fun Games | Hllo Games</title>
+  <meta name="description" content="Play the best free online games for girls! Fashion, makeup, dress-up, cooking and more. Creative and fun games for everyone. No downloads required!">
+  <meta name="keywords" content="free girls games, online dress up games, fashion games, makeup games, cooking games, barbie games, fun games for girls">
+  <link rel="canonical" href="https://hllogames.com/girls-games" />
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-96x96.png">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Free Online Girls Games | Fashion, Makeover & Fun Games">
+  <meta property="og:description" content="Play the best free online games for girls! Fashion, makeup, dress-up, cooking and more. Creative and fun games for everyone.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hllogames.com/girls-games">
+  <meta property="og:image" content="https://hllogames.com/images/girls-games-og.jpg">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --girls-color: #e84393;
+      --girls-dark: #fd79a8;
+      --girls-light: #fab1a0;
+      --girls-bg: #fff0f6;
+      --text-dark: #2d3436;
+      --sparkle: rgba(252, 228, 236, 0.6);
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      min-height: 100vh;
+      background-color: var(--girls-bg);
+      background-image: 
+        radial-gradient(var(--sparkle) 1px, transparent 1px),
+        radial-gradient(var(--sparkle) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: 0 0, 25px 25px;
+      color: var(--text-dark);
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 10px rgba(232, 67, 147, 0.1);
+      border-bottom: 3px solid var(--girls-light);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: var(--girls-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-button:hover {
+      background-color: var(--girls-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .back-button i {
+      margin-right: 8px;
+    }
+
+    #category-title {
+      text-align: center;
+      margin: 30px 0;
+      font-size: 2.5rem;
+      color: var(--girls-color);
+      position: relative;
+      display: inline-block;
+      padding: 0 20px;
+    }
+
+    #category-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--girls-light);
+      border-radius: 2px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 25px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .game-card {
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      background: white;
+      border: 1px solid rgba(232, 67, 147, 0.2);
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px) rotate(2deg);
+      box-shadow: 0 15px 30px rgba(232, 67, 147, 0.2);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+
+    .game-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .game-title-overlay {
+      position: relative;
+      padding: 15px;
+      background: white;
+      text-align: center;
+      font-weight: 600;
+      color: var(--text-dark);
+      border-top: 1px solid #eee;
+    }
+
+    .category-description {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-dark);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--girls-color);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 1;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .game-type {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255,255,255,0.9);
+      color: var(--girls-color);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      z-index: 1;
+      border: 1px solid rgba(232, 67, 147, 0.3);
+    }
+
+    .loading-spinner {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px;
+      color: var(--girls-color);
+      font-size: 1.2rem;
+    }
+
+    .loading-spinner i {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      100% { transform: scale(1.2); }
+    }
+
+    .girls-decoration {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 3rem;
+      color: rgba(232, 67, 147, 0.1);
+      z-index: -1;
+    }
+
+    .girls-filter {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .girls-filter button {
+      padding: 8px 16px;
+      border: none;
+      background: rgba(255,255,255,0.8);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid rgba(232, 67, 147, 0.2);
+    }
+
+    .girls-filter button:hover {
+      background: rgba(232, 67, 147, 0.1);
+    }
+
+    .girls-filter button.active {
+      background: var(--girls-color);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+      
+      #category-title {
+        font-size: 2rem;
+      }
+      
+      .game-card img {
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+      }
+      
+      .game-card img {
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="https://hllogames.com/" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+      <h1 id="category-title">Girls Games</h1>
+    </div>
+  </header>
+
+  <div class="category-description">
+    <p>Discover endless fun with our collection of creative games for everyone! From fashion makeovers to delicious cooking challenges, these games spark imagination and creativity. Perfect for players who love design, storytelling, and colorful adventures!</p>
+  </div>
+
+  <div class="girls-filter" id="girls-filter">
+    <button class="active" data-type="all">All Games</button>
+    <button data-type="fashion">👗 Fashion</button>
+    <button data-type="makeup">💄 Makeup</button>
+    <button data-type="cooking">🍳 Cooking</button>
+    <button data-type="dressup">👚 Dress Up</button>
+    <button data-type="decor">🏠 Decor</button>
+  </div>
+
+  <main class="grid-container" id="game-list"></main>
+
+  <div class="girls-decoration">
+    <i class="fas fa-sparkles"></i>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
+      authDomain: "hellogames-3566b.firebaseapp.com",
+      projectId: "hellogames-3566b",
+      storageBucket: "hellogames-3566b.appspot.com",
+      messagingSenderId: "911778987452",
+      appId: "1:911778987452:web:9f1892121a87ea60907fb9",
+      measurementId: "G-GFM5ZQXFG5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const gameList = document.getElementById('game-list');
+    const girlsFilter = document.getElementById('girls-filter');
+    let allGirlsGames = [];
+
+    async function loadGirlsGames() {
+      try {
+        gameList.innerHTML = '<div class="loading-spinner"><i class="fas fa-heart"></i> Loading fun games...</div>';
+        
+        const q = query(collection(db, "games"), where("category", "==", "girls"));
+        const querySnapshot = await getDocs(q);
+        
+        if (querySnapshot.empty) {
+          gameList.innerHTML = '<p class="no-games" style="grid-column:1/-1;text-align:center;color:var(--girls-color);">No games found. New creative games coming soon!</p>';
+          return;
+        }
+
+        allGirlsGames = [];
+        querySnapshot.forEach((doc) => {
+          allGirlsGames.push(doc.data());
+        });
+
+        filterGames('all');
+
+        // Add event listeners to filter buttons
+        girlsFilter.querySelectorAll('button').forEach(button => {
+          button.addEventListener('click', () => {
+            girlsFilter.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            filterGames(button.dataset.type);
+          });
+        });
+
+      } catch (error) {
+        console.error("Error loading games: ", error);
+        gameList.innerHTML = '<p class="error-message" style="grid-column:1/-1;text-align:center;color:var(--girls-color);">Oops! Couldn\'t load games. Please try again later.</p>';
+      }
+    }
+
+    function filterGames(gameType) {
+      gameList.innerHTML = '';
+      
+      const gamesToShow = gameType === 'all' 
+        ? allGirlsGames 
+        : allGirlsGames.filter(game => game.gameType === gameType);
+      
+      if (gamesToShow.length === 0) {
+        gameList.innerHTML = '<p class="no-games" style="grid-column:1/-1;text-align:center;color:var(--girls-color);">No games found in this category. Try another type!</p>';
+        return;
+      }
+
+      gamesToShow.forEach(game => {
+        const gameCard = createGameCard(game);
+        gameList.appendChild(gameCard);
+      });
+    }
+
+    function createGameCard(game) {
+      const a = document.createElement('a');
+      a.href = `play.html?game=${encodeURIComponent(game.link)}&title=${encodeURIComponent(game.name)}`;
+      a.className = `game-card ${game.size || 'small'}`;
+      a.setAttribute('aria-label', `Play ${game.name}`);
+      
+      const imgWrapper = document.createElement('div');
+      imgWrapper.className = 'game-image-wrapper';
+      
+      const img = document.createElement('img');
+      img.src = game.image || 'images/default-game.jpg';
+      img.alt = game.name;
+      img.loading = 'lazy';
+      
+      const overlay = document.createElement('div');
+      overlay.className = 'game-title-overlay';
+      overlay.textContent = game.name;
+      
+      imgWrapper.appendChild(img);
+      imgWrapper.appendChild(overlay);
+      
+      // Add popular tag if game is marked as popular
+      if (game.popular) {
+        const popularTag = document.createElement('span');
+        popularTag.className = 'popular-tag';
+        popularTag.innerHTML = '<i class="fas fa-star"></i> Favorite';
+        imgWrapper.appendChild(popularTag);
+      }
+      
+      // Add game type indicator
+      if (game.gameType) {
+        const typeTag = document.createElement('span');
+        typeTag.className = 'game-type';
+        typeTag.textContent = 
+          game.gameType === 'fashion' ? 'Fashion' :
+          game.gameType === 'makeup' ? 'Makeup' :
+          game.gameType === 'cooking' ? 'Cooking' :
+          game.gameType === 'dressup' ? 'Dress Up' : 'Decor';
+        imgWrapper.appendChild(typeTag);
+      }
+      
+      a.appendChild(imgWrapper);
+      return a;
+    }
+
+    // Load games when page loads
+    document.addEventListener('DOMContentLoaded', loadGirlsGames);
+  </script>
+</body>
+</html>

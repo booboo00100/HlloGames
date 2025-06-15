@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loading Game...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 960px;
+      height: 600px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .error {
+      color: red;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="game-title">Loading Game...</h1>
+  <div id="game-container"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBUAu5TwvkZvHPXGX1ou-cE79KCPCFk0Hc",
+      authDomain: "hellogames-3566b.firebaseapp.com",
+      projectId: "hellogames-3566b",
+      storageBucket: "hellogames-3566b.appspot.com",
+      messagingSenderId: "911778987452",
+      appId: "1:911778987452:web:9f1892121a87ea60907fb9",
+      measurementId: "G-GFM5ZQXFG5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const gameTitle = document.getElementById("game-title");
+    const container = document.getElementById("game-container");
+
+    // 1. Get game name from URL like /g/Subway%20Surfers
+    const fullPath = window.location.pathname;
+    const gameName = decodeURIComponent(fullPath.split("/g/")[1] || "").trim().toLowerCase();
+
+    async function loadGameByName() {
+      const snapshot = await getDocs(collection(db, "games"));
+      let matchedGame = null;
+
+      snapshot.forEach((doc) => {
+        const game = doc.data();
+        if (game.name && game.name.trim().toLowerCase() === gameName) {
+          matchedGame = game;
+        }
+      });
+
+      if (matchedGame && matchedGame.link) {
+        gameTitle.textContent = matchedGame.name;
+        const iframe = document.createElement("iframe");
+        iframe.src = matchedGame.link;
+        iframe.title = matchedGame.name;
+        container.appendChild(iframe);
+      } else {
+        gameTitle.textContent = "Game Not Found";
+        container.innerHTML = `<div class="error">No game named <strong>${gameName}</strong> found.</div>`;
+      }
+    }
+
+    loadGameByName();
+  </script>
+</body>
+</html>
