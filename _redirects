@@ -1,0 +1,2 @@
+/action-games        /action-games.html       301
+/action-games/*      /action-games/:splat.html 301

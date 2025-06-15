@@ -1,10 +1,12 @@
 {
   "name": "Hllo Games",
   "short_name": "Hllo",
-  "start_url": "/",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
+  "orientation": "portrait",
+  "lang": "en",
   "icons": [
     {
       "src": "/icons/web-app-manifest-192x192.png",
@@ -12,9 +14,16 @@
       "type": "image/png"
     },
     {
-      "src": "/icons/apple-touch-icon.png",
+      "src": "/icons/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
+
